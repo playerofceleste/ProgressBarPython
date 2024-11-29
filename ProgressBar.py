@@ -61,18 +61,23 @@ class ProgressBar:
     def increment(self, by = 1):
         """Increments the value of the bar by a specified amount, defaults to 1"""
         self.update(self.value + by)
+     
     def decrement(self, by = 1):
         """Decrements the value of the bar by a specified amount, defaults to 1"""
         self.update(self.value - by)
+    
     def invert(self):
         """Inverts the filled section"""
         self.update(self.width - self.value)
+     
     def zero(self):
         """Sets the bar's value to zero"""
         self.update(0)
+     
     def change_width(self, new_width: int):
         self.width = new_width
         self.update(self.value)
+     
     def reset(self):
         """Sets the value to the initially assigned value"""
         self.update(self.init_value)
