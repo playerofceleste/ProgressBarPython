@@ -20,6 +20,7 @@ class ProgressBar:
     def __init__(self, name: str, width: int, init_value: int):
         self.width = width
         self.init_value = init_value
+        self.init_width = width
         self.value = init_value
         self.name = name
         self.update(self.value)
@@ -57,8 +58,22 @@ class ProgressBar:
                 name_affix = '' #Empty
             print('\r', end = '') #This begins the line overwrite
             print(f'[[{filled_section + unfilled_section}]] {name_affix}[{rounded_percentage}%]', end = '', flush = True)
- 
- 
-####### Testing #######
- 
-bar1 = ProgressBar('bar1',19,10)
+    def increment(self, by = 1):
+        """Increments the value of the bar by a specified amount, defaults to 1"""
+        self.update(self.value + by)
+    def decrement(self, by = 1):
+        """Decrements the value of the bar by a specified amount, defaults to 1"""
+        self.update(self.value - by)
+    def invert(self):
+        """Inverts the filled section"""
+        self.update(self.width - self.value)
+    def zero(self):
+        """Sets the bar's value to zero"""
+        self.update(0)
+    def change_width(self, new_width: int):
+        self.width = new_width
+        self.update(self.value)
+    def reset(self):
+        """Sets the value to the initially assigned value"""
+        self.update(self.init_value)
+        self.change_width(self.init_width)
